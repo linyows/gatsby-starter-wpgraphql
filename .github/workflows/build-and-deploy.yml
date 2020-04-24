@@ -1,0 +1,33 @@
+name: Build and Deploy
+on:
+  - repository_dispatch
+  - push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run builds and deploys with ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: npm install and build
+      env:
+        GATSBY_API: ${{ secrets.GATSBY_API }}
+      run: |
+        npm i -D
+#        npm run build
+#    - name: deploy by scp
+#      uses: appleboy/scp-action@master
+#      with:
+#        host: ${{ secrets.HOST }}
+#        username: ${{ secrets.USERNAME }}
+#        password: ${{ secrets.PASSWORD }}
+#        port: ${{ secrets.PORT }}
+#        source: ${{ secrets.SOURCE }}
+#        target: ${{ secrets.TARGET }}
