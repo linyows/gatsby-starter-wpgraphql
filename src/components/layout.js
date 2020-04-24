@@ -71,7 +71,10 @@ const Layout = ({ children }) => {
       </header>
 
       <main className="site-main">{children}</main>
-      <footer className="site-footer">Copyright © {nowY()} {title}. All rights reserved.</footer>
+      <footer className="site-footer">
+        Copyright © {nowY()} {title}. All rights reserved.
+        Designed by <a href="https://github.com/linyows/gatsby-starter-wpgraphql">linyows.</a>
+      </footer>
     </>
   )
 }
