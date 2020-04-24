@@ -1,4 +1,10 @@
 module.exports = {
+  siteMetadata: {
+    title: `L I N Y O W S 🤡`,
+    description: `Yo!`,
+    author: `linyows`,
+    siteUrl: `https://linyows.com`,
+  },
   plugins: [
     {
       resolve: "gatsby-source-graphql",
