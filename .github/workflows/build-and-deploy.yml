@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
-  - repository_dispatch
-  - push:
+  repository_dispatch
+  push:
     branches:
       - master
 jobs:
