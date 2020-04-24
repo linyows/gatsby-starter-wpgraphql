@@ -172,12 +172,13 @@ a:hover {
     font-size: .85em;
   }
   h1, h2, h3, h4, h5, p {
-    padding-right: 1em;
+    padding-right: 0;
   }
   .site-header,
   .site-main,
   .site-footer {
     padding-left: 1em;
+    padding-right: 1em;
   }
   .site-avatar {
     margin-right: .8em;
