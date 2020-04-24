@@ -1,6 +1,6 @@
 name: Build and Deploy
 on:
-  repository_dispatch
+  repository_dispatch:
   push:
     branches:
       - master
