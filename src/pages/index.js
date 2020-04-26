@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
+import Head from "../components/head"
 import { dateF, timeF } from "../../lib/date"
 
 export const query = graphql`
@@ -30,6 +31,7 @@ const Blog = ({ data }) => {
 
   return (
     <Layout>
+      <Head />
       <h1 className="page-title">Home</h1>
       {posts.map(post => (
         <article key={post.id} className="post">

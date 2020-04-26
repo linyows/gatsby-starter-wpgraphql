@@ -1,9 +1,9 @@
 import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
+import { nowY } from "../../lib/date"
 import "normalize.css"
 import "@wordpress/block-library/build-style/style.css"
-import "../styles/layout.css"
-import { nowY } from "../../lib/date"
+import "./layout.css"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -12,11 +12,11 @@ const Layout = ({ children }) => {
         generalSettings {
           title
           url
+          description
         }
         users {
           nodes {
-            nickname
-            description
+            slug
             avatar {
               url
             }
@@ -36,9 +36,9 @@ const Layout = ({ children }) => {
     }
   `)
 
-  const { title, url } = data.wpgraphql.generalSettings
+  const { title, url, description } = data.wpgraphql.generalSettings
   const user = data.wpgraphql.users.nodes[0]
-  const items = data.wpgraphql.menus.nodes.length > 0 ? data.wpgraphql.menus.nodes[0].menuItems.nodes.map(item => ({
+  const items = (data.wpgraphql.menus.nodes.length > 0) ? data.wpgraphql.menus.nodes[0].menuItems.nodes.map(item => ({
     ...item,
     url: item.url.replace(url, ""),
   })) : []
@@ -48,12 +48,12 @@ const Layout = ({ children }) => {
       <header className="site-header">
         <p className="site-title">
           <Link to="/" className="home">
-            <img src={user.avatar.url} alt={user.nickname} className="site-avatar" />
+            <img src={user.avatar.url} alt={user.slug} className="site-avatar" />
             {title}
           </Link>
         </p>
 
-        {user.description !== null &&
+        {description !== '' &&
           <p className="site-desc">
             {user.description}
           </p>
@@ -72,9 +72,10 @@ const Layout = ({ children }) => {
 
       <main className="site-main">{children}</main>
       <footer className="site-footer">
-        Copyright © {nowY()} {title}. All rights reserved.
+        Copyright &copy; {nowY()} {title}. All rights reserved.<br/>
         Designed by <a href="https://github.com/linyows/gatsby-starter-wpgraphql">linyows.</a>
       </footer>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&family=Noto+Serif+JP:wght@900&display=swap" />
     </>
   )
 }

@@ -1,11 +1,9 @@
 module.exports = {
-  siteMetadata: {
-    title: `L I N Y O W S 🤡`,
-    description: `Yo!`,
-    author: `linyows`,
-    siteUrl: `https://linyows.com`,
-  },
   plugins: [
+    `gatsby-plugin-react-helmet`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    `gatsby-plugin-offline`,
     {
       resolve: "gatsby-source-graphql",
       options: {
@@ -15,14 +13,48 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-fonts`,
+      resolve: `gatsby-source-filesystem`,
       options: {
-        fonts: [
-          `Noto+Sans+JP:300,900`,
-          `Noto+Serif+JP`
-        ],
-        display: 'swap'
+        name: `images`,
+        path: `${__dirname}/src/images`,
       }
     },
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        color: `#888`,
+        showSpinner: false,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Built with Gatsby`,
+        short_name: `Gatsby`,
+        start_url: `/`,
+        background_color: `#333`,
+        theme_color: `#333`,
+        display: `standalone`,
+        icon: `static/apple-touch-icon.png`,
+        icons: [
+          {
+            src: `static/android-chrome-192x192.png`,
+            sizes: `192x192`,
+            type: `image/png`,
+          },
+          {
+            src: `static/android-chrome-512x512.png`,
+            sizes: `512x512`,
+            type: `image/png`,
+          },
+        ],
+      },
+    },
+    // {
+    //   resolve: `gatsby-plugin-google-analytics`,
+    //   options: {
+    //     trackingId: ``
+    //   }
+    // },
   ],
 }

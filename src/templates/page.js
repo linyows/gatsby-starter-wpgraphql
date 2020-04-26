@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
+import Head from "../components/head"
 import Layout from '../components/layout';
 
 export const query = graphql`
@@ -17,6 +18,7 @@ const PageTemplate = ({ data }) => {
   const page = data.wpgraphql.page
   return (
     <Layout>
+      <Head title={page.title} />
       <h1 className="page-title" dangerouslySetInnerHTML={{ __html: page.title }} />
       <div className="page-content" dangerouslySetInnerHTML={{ __html: page.content }} />
     </Layout>
