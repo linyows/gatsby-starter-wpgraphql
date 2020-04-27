@@ -1,11 +1,16 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import Layout from '../components/layout';
+import Layout from "../components/layout"
 import Head from "../components/head"
 import { dateF, timeF } from "../../lib/date"
+import { PostQuery } from "../../types/graphql-types"
+
+type Props = {
+  data: PostQuery
+}
 
 export const query = graphql`
-  query($id: ID!) {
+  query Post($id: ID!) {
     wpgraphql {
       post(id: $id) {
         title
@@ -23,14 +28,17 @@ export const query = graphql`
   }
 `
 
-const PostTemplate = ({ data }) => {
+const Component: React.FC<Props> = ({ data }) => {
   const post = data.wpgraphql.post
   return (
     <Layout>
       <Head title={post.title} description={post.excerpt} />
       <div className="entry">
         <p className="page-title">Blog</p>
-        <h1 className="post-title" dangerouslySetInnerHTML={{ __html: post.title }} />
+        <h1
+          className="post-title"
+          dangerouslySetInnerHTML={{ __html: post.title }}
+        />
         <div className="post-meta">
           <p className="post-date">
             {dateF(post.date)}
@@ -46,10 +54,13 @@ const PostTemplate = ({ data }) => {
             ))}
           </ul>
         </div>
-        <div className="post-content" dangerouslySetInnerHTML={{ __html: post.content }} />
+        <div
+          className="post-content"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
       </div>
     </Layout>
   )
 }
 
-export default PostTemplate
+export default Component

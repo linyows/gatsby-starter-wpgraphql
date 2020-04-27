@@ -7,13 +7,13 @@ exports.createPages = async ({ actions, graphql }) => {
             id
             uri
           }
-        },
+        }
         posts {
           nodes {
             id
             uri
           }
-        },
+        }
         tags {
           nodes {
             id
@@ -29,7 +29,7 @@ exports.createPages = async ({ actions, graphql }) => {
   pages.forEach(page => {
     actions.createPage({
       path: page.uri,
-      component: require.resolve("./src/templates/page.js"),
+      component: require.resolve("./src/templates/page.tsx"),
       context: {
         id: page.id,
       },
@@ -40,7 +40,7 @@ exports.createPages = async ({ actions, graphql }) => {
   posts.forEach(post => {
     actions.createPage({
       path: `blog${post.uri}`,
-      component: require.resolve("./src/templates/post.js"),
+      component: require.resolve("./src/templates/post.tsx"),
       context: {
         id: post.id,
       },
@@ -51,7 +51,7 @@ exports.createPages = async ({ actions, graphql }) => {
   tags.forEach(tag => {
     actions.createPage({
       path: `blog/tags/${tag.slug}`,
-      component: require.resolve("./src/templates/post-list.js"),
+      component: require.resolve("./src/templates/post-list.tsx"),
       context: {
         id: tag.id,
         name: tag.name,
