@@ -23,6 +23,12 @@ export const query = graphql`
             slug
           }
         }
+        author {
+          slug
+          avatar {
+            url
+          }
+        }
       }
     }
   }
@@ -58,6 +64,19 @@ const Component: React.FC<Props> = ({ data }) => {
           className="post-content"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
+      </div>
+      <div className="post-author">
+        <img
+          src={post.author.avatar.url}
+          alt={post.author.slug}
+          className="post-author-avatar"
+        />
+        <p className="post-author-line">
+          Written by <Link to="/" className="post-autho-name">
+            {post.author.slug}
+          </Link>
+        </p>
+        <p className="post-author-desc">{post.author.description}</p>
       </div>
     </Layout>
   )

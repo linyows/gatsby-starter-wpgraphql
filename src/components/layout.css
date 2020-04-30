@@ -145,6 +145,34 @@ a:hover {
   padding: 0;
 }
 
+.post-author {
+  margin: 3em 0;
+  color: #666;
+}
+.post-author-avatar {
+  border: 1px solid #EEE;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: inline;
+  margin-right: 1em;
+  margin-bottom: -.4em;
+}
+.post-author-line {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+.post-author-line a {
+  font-weight: bold;
+}
+.post-author-desc {
+  display: block;
+  margin: 0 0 0 30px;
+  padding: 0 0 0 1em;
+}
+
+
 @media (prefers-color-scheme: dark) {
   html,
   body {
