@@ -2241,6 +2241,9 @@ export type SitePageFieldsEnum =
   'pluginCreator___name' |
   'pluginCreator___version' |
   'pluginCreator___pluginOptions___fileName' |
+  'pluginCreator___pluginOptions___typeName' |
+  'pluginCreator___pluginOptions___fieldName' |
+  'pluginCreator___pluginOptions___url' |
   'pluginCreator___pluginOptions___name' |
   'pluginCreator___pluginOptions___path' |
   'pluginCreator___pluginOptions___color' |
@@ -2256,9 +2259,6 @@ export type SitePageFieldsEnum =
   'pluginCreator___pluginOptions___icons___sizes' |
   'pluginCreator___pluginOptions___icons___type' |
   'pluginCreator___pluginOptions___pathCheck' |
-  'pluginCreator___pluginOptions___typeName' |
-  'pluginCreator___pluginOptions___fieldName' |
-  'pluginCreator___pluginOptions___url' |
   'pluginCreator___nodeAPIs' |
   'pluginCreator___browserAPIs' |
   'pluginCreator___ssrAPIs' |
@@ -2446,6 +2446,9 @@ export type SitePluginFieldsEnum =
   'name' |
   'version' |
   'pluginOptions___fileName' |
+  'pluginOptions___typeName' |
+  'pluginOptions___fieldName' |
+  'pluginOptions___url' |
   'pluginOptions___name' |
   'pluginOptions___path' |
   'pluginOptions___color' |
@@ -2461,9 +2464,6 @@ export type SitePluginFieldsEnum =
   'pluginOptions___icons___sizes' |
   'pluginOptions___icons___type' |
   'pluginOptions___pathCheck' |
-  'pluginOptions___typeName' |
-  'pluginOptions___fieldName' |
-  'pluginOptions___url' |
   'nodeAPIs' |
   'browserAPIs' |
   'ssrAPIs' |
@@ -2577,6 +2577,9 @@ export type SitePluginPackageJsonPeerDependenciesFilterListInput = {
 
 export type SitePluginPluginOptions = {
   fileName?: Maybe<Scalars['String']>;
+  typeName?: Maybe<Scalars['String']>;
+  fieldName?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   path?: Maybe<Scalars['String']>;
   color?: Maybe<Scalars['String']>;
@@ -2589,13 +2592,13 @@ export type SitePluginPluginOptions = {
   icon?: Maybe<Scalars['String']>;
   icons?: Maybe<Array<Maybe<SitePluginPluginOptionsIcons>>>;
   pathCheck?: Maybe<Scalars['Boolean']>;
-  typeName?: Maybe<Scalars['String']>;
-  fieldName?: Maybe<Scalars['String']>;
-  url?: Maybe<Scalars['String']>;
 };
 
 export type SitePluginPluginOptionsFilterInput = {
   fileName?: Maybe<StringQueryOperatorInput>;
+  typeName?: Maybe<StringQueryOperatorInput>;
+  fieldName?: Maybe<StringQueryOperatorInput>;
+  url?: Maybe<StringQueryOperatorInput>;
   name?: Maybe<StringQueryOperatorInput>;
   path?: Maybe<StringQueryOperatorInput>;
   color?: Maybe<StringQueryOperatorInput>;
@@ -2608,9 +2611,6 @@ export type SitePluginPluginOptionsFilterInput = {
   icon?: Maybe<StringQueryOperatorInput>;
   icons?: Maybe<SitePluginPluginOptionsIconsFilterListInput>;
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
-  typeName?: Maybe<StringQueryOperatorInput>;
-  fieldName?: Maybe<StringQueryOperatorInput>;
-  url?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsIcons = {
@@ -3646,14 +3646,6 @@ export type WpGraphQl_ContentNodeIdTypeEnum =
 
 export type WpGraphQl_ContentRevisionUnion = WpGraphQl_Post | WpGraphQl_Page;
 
-/** The template assigned to a node of content */
-export type WpGraphQl_ContentTemplate = {
-  /** The name of the template */
-  templateName?: Maybe<Scalars['String']>;
-};
-
-export type WpGraphQl_ContentTemplateUnion = WpGraphQl_DefaultTemplate | WpGraphQl_Template;
-
 /** An Post Type object */
 export type WpGraphQl_ContentType = WpGraphQl_Node & {
   /** Whether this content type should can be exported. */
@@ -4101,12 +4093,6 @@ export type WpGraphQl_DateQueryInput = {
   year?: Maybe<Scalars['Int']>;
 };
 
-/** The template assigned to the node */
-export type WpGraphQl_DefaultTemplate = WpGraphQl_ContentTemplate & {
-  /** The name of the template */
-  templateName?: Maybe<Scalars['String']>;
-};
-
 /** Input for the deleteCategory mutation */
 export type WpGraphQl_DeleteCategoryInput = {
   clientMutationId: Scalars['String'];
@@ -4287,10 +4273,6 @@ export type WpGraphQl_GeneralSettings = {
 export type WpGraphQl_HierarchicalContentNode = {
   /** The parent of the object. The parent object can be of various types */
   parent?: Maybe<WpGraphQl_PostObjectUnion>;
-  /** Database id of the parent object */
-  parentDatabaseId?: Maybe<Scalars['Int']>;
-  /** The globally unique identifier of the parent object. */
-  parentId?: Maybe<Scalars['ID']>;
 };
 
 /** File details for a Media Item */
@@ -4382,10 +4364,6 @@ export type WpGraphQl_MediaItem = WpGraphQl_Node & WpGraphQl_ContentNode & WpGra
   modifiedGmt?: Maybe<Scalars['String']>;
   /** The parent of the object. The parent object can be of various types */
   parent?: Maybe<WpGraphQl_PostObjectUnion>;
-  /** Database id of the parent object */
-  parentDatabaseId?: Maybe<Scalars['Int']>;
-  /** The globally unique identifier of the parent object. */
-  parentId?: Maybe<Scalars['ID']>;
   /** The sizes attribute value for an image. */
   sizes?: Maybe<Scalars['String']>;
   /**
@@ -4403,8 +4381,6 @@ export type WpGraphQl_MediaItem = WpGraphQl_Node & WpGraphQl_ContentNode & WpGra
   srcSet?: Maybe<Scalars['String']>;
   /** The current status of the object */
   status?: Maybe<Scalars['String']>;
-  /** The template assigned to the node */
-  template?: Maybe<WpGraphQl_ContentTemplateUnion>;
   /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
   title?: Maybe<Scalars['String']>;
   /** URI path for the resource */
@@ -4498,8 +4474,6 @@ export type WpGraphQl_MediaItemSizeEnum =
   'POST_THUMBNAIL' |
   /** MediaItem with the thumbnail size */
   'THUMBNAIL' |
-  /** MediaItem with the twentytwenty-fullscreen size */
-  'TWENTYTWENTY_FULLSCREEN' |
   /** MediaItem with the 1536x1536 size */
   '_1536X1536' |
   /** MediaItem with the 2048x2048 size */
@@ -4741,10 +4715,8 @@ export type WpGraphQl_MenuItemToMenuItemConnectionWhereArgs = {
 
 /** Registered menu locations */
 export type WpGraphQl_MenuLocationEnum = 
-  'EXPANDED' |
   'FOOTER' |
-  'MOBILE' |
-  'PRIMARY' |
+  'MENU_1' |
   'SOCIAL';
 
 /** Connection between the Menu type and the MenuItem type */
@@ -5040,10 +5012,6 @@ export type WpGraphQl_Page = WpGraphQl_Node & WpGraphQl_ContentNode & WpGraphQl_
   pageId: Scalars['Int'];
   /** The parent of the object. The parent object can be of various types */
   parent?: Maybe<WpGraphQl_PostObjectUnion>;
-  /** Database id of the parent object */
-  parentDatabaseId?: Maybe<Scalars['Int']>;
-  /** The globally unique identifier of the parent object. */
-  parentId?: Maybe<Scalars['ID']>;
   /**
    * If the current node is a revision, this field exposes the node this is a
    * revision of. Returns null if the node is not a revision of another node.
@@ -5059,8 +5027,6 @@ export type WpGraphQl_Page = WpGraphQl_Node & WpGraphQl_ContentNode & WpGraphQl_
   slug?: Maybe<Scalars['String']>;
   /** The current status of the object */
   status?: Maybe<Scalars['String']>;
-  /** The template assigned to the node */
-  template?: Maybe<WpGraphQl_ContentTemplateUnion>;
   /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
   title?: Maybe<Scalars['String']>;
   /** URI path for the resource */
@@ -5462,8 +5428,6 @@ export type WpGraphQl_Post = WpGraphQl_Node & WpGraphQl_ContentNode & WpGraphQl_
   status?: Maybe<Scalars['String']>;
   /** Connection between the post type and the tag type */
   tags?: Maybe<WpGraphQl_PostToTagConnection>;
-  /** The template assigned to the node */
-  template?: Maybe<WpGraphQl_ContentTemplateUnion>;
   /** Terms connected to the object */
   termNames?: Maybe<Array<Maybe<Scalars['String']>>>;
   /** Terms connected to the object */
@@ -7683,12 +7647,6 @@ export type WpGraphQl_TaxonomyIdTypeEnum =
   /** The name of the taxonomy */
   'NAME';
 
-/** The template assigned to the node */
-export type WpGraphQl_Template = WpGraphQl_ContentTemplate & {
-  /** The name of the template */
-  templateName?: Maybe<Scalars['String']>;
-};
-
 /** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
 export type WpGraphQl_TermNode = {
   /** The number of objects connected to the object */
@@ -8763,7 +8721,7 @@ export type Unnamed_1_Query = { placeholderImage?: Maybe<{ childImageSharp?: May
 export type LayoutQueryVariables = {};
 
 
-export type LayoutQuery = { wpgraphql: { generalSettings?: Maybe<Pick<WpGraphQl_GeneralSettings, 'title' | 'url' | 'description'>>, users?: Maybe<{ nodes?: Maybe<Array<Maybe<(
+export type LayoutQuery = { wpgraphql: { generalSettings?: Maybe<Pick<WpGraphQl_GeneralSettings, 'title' | 'description'>>, users?: Maybe<{ nodes?: Maybe<Array<Maybe<(
         Pick<WpGraphQl_User, 'slug'>
         & { avatar?: Maybe<Pick<WpGraphQl_Avatar, 'url'>> }
       )>>> }>, menus?: Maybe<{ nodes?: Maybe<Array<Maybe<{ menuItems?: Maybe<{ nodes?: Maybe<Array<Maybe<Pick<WpGraphQl_MenuItem, 'label' | 'url'>>>> }> }>>> }> } };
@@ -8801,7 +8759,7 @@ export type PostQueryVariables = {
 export type PostQuery = { wpgraphql: { post?: Maybe<(
       Pick<WpGraphQl_Post, 'title' | 'content' | 'date' | 'excerpt'>
       & { tags?: Maybe<{ nodes?: Maybe<Array<Maybe<Pick<WpGraphQl_Tag, 'name' | 'slug'>>>> }>, author?: Maybe<(
-        Pick<WpGraphQl_User, 'slug'>
+        Pick<WpGraphQl_User, 'slug' | 'description'>
         & { avatar?: Maybe<Pick<WpGraphQl_Avatar, 'url'>> }
       )> }
     )> } };
