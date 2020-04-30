@@ -25,6 +25,7 @@ export const query = graphql`
         }
         author {
           slug
+          description
           avatar {
             url
           }
