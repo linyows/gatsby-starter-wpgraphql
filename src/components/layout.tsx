@@ -12,7 +12,6 @@ const Component: React.FC = ({ children }) => {
       wpgraphql {
         generalSettings {
           title
-          url
           description
         }
         users {
@@ -37,13 +36,13 @@ const Component: React.FC = ({ children }) => {
     }
   `)
 
-  const { title, url, description } = data.wpgraphql.generalSettings
+  const { title, description } = data.wpgraphql.generalSettings
   const user = data.wpgraphql.users.nodes[0]
   const items =
     data.wpgraphql.menus.nodes.length > 0
       ? data.wpgraphql.menus.nodes[0].menuItems.nodes.map(item => ({
           ...item,
-          url: item.url.replace(url, ""),
+          url: item.url.replace(/^https?:\/\/[a-z0-9-.:]+/, ""),
         }))
       : []
 
