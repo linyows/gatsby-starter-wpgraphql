@@ -126,7 +126,13 @@ a:hover {
   color: #999;
   font-weight: normal;
 }
-
+.page-content ul {
+  padding: .5em 0 1em 1em;
+}
+.page-content li {
+  line-height: 1.7;
+  padding: 0 0 .5em .5em;
+}
 .page-content a,
 .post-content a {
   padding-bottom: 1px;
@@ -165,6 +171,7 @@ a:hover {
 }
 .post-author-line a {
   font-weight: bold;
+  font-family: 'Noto Sans JP', sans-serif;
 }
 .post-author-desc {
   display: block;
@@ -191,6 +198,9 @@ a:hover {
   .page-content a,
   .post-content a {
     border-bottom-color: #fff;
+  }
+  .post-author {
+    color: #AAA;
   }
 }
 
